@@ -9,10 +9,22 @@ export enum Paths{
     DAIRY = "dairy",
     ERROR = "error",
     BACK = "back",
-    LOGIN = "login"
+    LOGIN = "login",
+    LOGOUT = "logout",
+    SIGNUP = "signup"
+};
+
+export enum Roles {
+    ALL=0, USER = 1, ADMIN = 2, NO_AUTH =3
 };
 
 export type RouteType = {
     path: Paths,
-    title: string
+    title: string,
+    role?:Roles
+};
+
+export type LoginData = {
+    email:string,
+    password:string
 };

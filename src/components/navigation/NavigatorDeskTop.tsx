@@ -11,6 +11,16 @@ type Props = {
 const NavigatorDeskTop:FC<Props> = ({items}) => {
 
     const[value, setValue] = useState(0);
+    // const{pathname} = useLocation();
+    // console.log(pathname);
+    //
+    // useEffect(() => {
+    //     const index = items.findIndex(item => item.path === pathname.substring(1) )
+    //     console.log(value)
+    //     console.log(index)
+    //     if(value !== index)
+    //         setValue(Math.max(index, 0));
+    // }, [pathname]);
 
     const handleOnChange = (_e: React.SyntheticEvent, newValue:number)=>{
         setValue(newValue)
