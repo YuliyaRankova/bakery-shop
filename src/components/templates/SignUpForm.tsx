@@ -10,8 +10,13 @@ import Typography from '@mui/material/Typography';
 import { GoogleIcon, SitemarkIcon } from './CustomIcons';
 import {Container} from "./templates_utils/templatesStyle.ts";
 import {Card} from "./templates_utils/templatesStyle.ts";
+import {SignUpData} from "../../utils/shop-types.ts";
 
-export default function SignUpForm() {
+type Props={
+    handleSignUpForm: (data:SignUpData) => void
+};
+
+export default function SignUpForm(props:Props) {
     const [emailError, setEmailError] = React.useState(false);
     const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
     const [passwordError, setPasswordError] = React.useState(false);
@@ -61,11 +66,10 @@ export default function SignUpForm() {
             return;
         }
         const data = new FormData(event.currentTarget);
-        console.log({
-            name: data.get('name'),
-            lastName: data.get('lastName'),
-            email: data.get('email'),
-            password: data.get('password'),
+        props.handleSignUpForm({
+            fullName: data.get('name') as string,
+            email: data.get('email') as string,
+            password: data.get('password') as string,
         });
     };
 
@@ -159,7 +163,7 @@ export default function SignUpForm() {
                         <Typography sx={{ textAlign: 'center' }}>
                             Already have an account?{' '}
                             <Link
-                                href="/material-ui/getting-started/templates/sign-in/"
+                                href="/login"
                                 variant="body2"
                                 sx={{ alignSelf: 'center' }}
                             >

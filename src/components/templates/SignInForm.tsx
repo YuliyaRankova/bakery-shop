@@ -129,14 +129,14 @@ export default function SignInForm(props: Props) {
                     <Button
                         fullWidth
                         variant="outlined"
-                        onClick={() => alert('Sign in with Google')}
+                        onClick={() => props.handleFormSubmit({email: 'GOOGLE', password: ''})}
                         startIcon={<GoogleIcon/>}
                     >Sign in with Google
                     </Button>
                     <Typography sx={{textAlign: 'center'}}>
                         Don&apos;t have an account?{' '}
                         <Link
-                            href= "#"
+                            href= "/register"
                             variant="body2"
                             sx={{alignSelf: 'center'}}
                         >Sign up
