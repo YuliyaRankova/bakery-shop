@@ -1,6 +1,6 @@
 import SignUpForm from "../templates/SignUpForm.tsx";
-import {LoginData, Paths, SignUpData} from "../../utils/shop-types.ts";
-import {registerWithEmailAndPassword} from "../../firebase/firebaseAuthService.ts";
+import {LoginData, SignUpData} from "../../utils/shop-types.ts";
+import {registerWithEmailAndPassword, showUserInfo} from "../../firebase/firebaseAuthService.ts";
 import {useNavigate} from "react-router-dom";
 
 const Registration = () => {
@@ -18,11 +18,13 @@ const Registration = () => {
         }
         try{
             await registerWithEmailAndPassword(userEmailPass);
-            navigate(Paths.LOGIN);
+            await showUserInfo(data);
+            navigate("/login");
         }catch (e) {
             console.log(e)
         }
-    }
+    };
+
 
     return (
         <div>

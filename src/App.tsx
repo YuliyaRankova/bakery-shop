@@ -29,16 +29,12 @@ function App() {
     }, []);
 
     const predicate = (item:RouteType) => {
-        const isAdmin = authUser?.includes("admin");
-        if (item.title === "Shopping Cart" && isAdmin) {
-            return false;
-        };
-
         return(
             item.role === Roles.ALL ||
-                item.role === Roles.USER && authUser ||
-                item.role === Roles.ADMIN && isAdmin||
-                item.role === Roles.NO_AUTH && !authUser
+            item.role === Roles.USER && authUser||
+            item.role === Roles.ADMIN && authUser && authUser.email.includes('admin')||
+            item.role === Roles.NO_AUTH && !authUser||
+            item.role === Roles.NO_ADMIN && authUser && !authUser.email.includes('admin')
         )
     };
 

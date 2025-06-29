@@ -15,7 +15,7 @@ export enum Paths{
 };
 
 export enum Roles {
-    ALL=0, USER = 1, ADMIN = 2, NO_AUTH =3
+    ALL=0, USER = 1, ADMIN = 2, NO_AUTH =3, NO_ADMIN =4
 };
 
 export type RouteType = {
@@ -30,7 +30,8 @@ export type LoginData = {
 };
 
 export type SignUpData = {
-    fullName: string,
+    firstName: string,
+    lastName:string,
     email:string,
     password:string
 };
@@ -42,4 +43,8 @@ export type ProductType ={
     unit:string,
     cost:number,
     img:string
+}
+
+export type Category={
+    category_name:string,
 }

@@ -1,10 +1,14 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 type AuthState = {
-    authUser: string
+    authUser: {
+        email:string,
+        displayName:string,
+    } | null
 };
+
 const initialState:AuthState = {
-    authUser: ""
+    authUser: null
 }
 
 const authSlice = createSlice({
@@ -15,7 +19,7 @@ const authSlice = createSlice({
            state.authUser = action.payload;
        },
        logoutAction:(state) => {
-           state.authUser = "";
+           state.authUser = null;
        }
     }
 });
