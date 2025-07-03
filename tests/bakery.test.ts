@@ -41,7 +41,7 @@ describe('BakeryShop.dbService', () => {
     })
 
     test('isCategoryExist', () => {
-        expect(isCategoryExist).resolves.toBeTruthy()
+        expect(isCategoryExist('bread')).resolves.toBeTruthy()
         expect(isCategoryExist('milk')).resolves.not.toBeTruthy()
     })
 })

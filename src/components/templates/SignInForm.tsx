@@ -11,9 +11,10 @@ import {GoogleIcon, SitemarkIcon} from './CustomIcons';
 import {LoginData} from "../../utils/shop-types.ts";
 import {Container} from "./templates_utils/templatesStyle.ts";
 import {Card} from "./templates_utils/templatesStyle.ts";
+import {Checkbox, FormControlLabel} from "@mui/material";
 
 type Props = {
-    handleFormSubmit: (loginData:LoginData) => void
+    submitFn: (loginData:LoginData) => void
 };
 
 export default function SignInForm(props: Props) {
@@ -29,7 +30,7 @@ export default function SignInForm(props: Props) {
             return;
         }
         const data = new FormData(event.currentTarget);
-        props.handleFormSubmit({
+        props.submitFn({
             email: data.get('email') as string,
             password: data.get('password') as string,
         });
@@ -66,11 +67,17 @@ export default function SignInForm(props: Props) {
         <Container direction="column" justifyContent="space-between">
             <Card variant="outlined">
                 <SitemarkIcon/>
-                <Typography component="h1" variant="h4"
+                <Typography
+                    component="h1"
+                    variant="h4"
                     sx={{width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)'}}
-                >Sign in
+                >
+                    Sign in
                 </Typography>
-                <Box component="form" onSubmit={handleSubmit} noValidate
+                <Box
+                    component="form"
+                    onSubmit={handleSubmit}
+                    noValidate
                     sx={{
                         display: 'flex',
                         flexDirection: 'column',
@@ -112,16 +119,17 @@ export default function SignInForm(props: Props) {
                             color={passwordError ? 'error' : 'primary'}
                         />
                     </FormControl>
-                    {/*<FormControlLabel*/}
-                    {/*    control={<Checkbox value="remember" color="primary"/>}*/}
-                    {/*    label="Remember me"*/}
-                    {/*/>*/}
+                    <FormControlLabel
+                        control={<Checkbox value="remember" color="primary"/>}
+                        label="Remember me"
+                    />
                     <Button
                         type="submit"
                         fullWidth
                         variant="contained"
                         onClick={validateInputs}
-                    >Sign in
+                    >
+                        Sign in
                     </Button>
                 </Box>
                 <Divider>or</Divider>
@@ -129,17 +137,19 @@ export default function SignInForm(props: Props) {
                     <Button
                         fullWidth
                         variant="outlined"
-                        onClick={() => props.handleFormSubmit({email: 'GOOGLE', password: ''})}
+                        onClick={() => props.submitFn({email:"GOOGLE", password:""})}
                         startIcon={<GoogleIcon/>}
-                    >Sign in with Google
+                    >
+                        Sign in with Google
                     </Button>
                     <Typography sx={{textAlign: 'center'}}>
                         Don&apos;t have an account?{' '}
                         <Link
-                            href= "/register"
+                            href="/register"
                             variant="body2"
                             sx={{alignSelf: 'center'}}
-                        >Sign up
+                        >
+                            Sign up
                         </Link>
                     </Typography>
                 </Box>

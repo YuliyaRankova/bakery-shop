@@ -1,7 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
-import {Paths} from "../../utils/shop-types.ts";
-
+import {Paths} from "../../utils/paths.ts";
 
 const ErrorPage = () => {
 
@@ -9,11 +8,11 @@ const ErrorPage = () => {
 
     useEffect(() => {
         navigate(`/${Paths.ERROR}`)
+        console.log('Done')
     }, []);
-
     return (
         <h2>
-            ERROR! Something went wrong!
+            OOOPS! Something went wrong!!! 404 not found!!!
         </h2>
     );
 };

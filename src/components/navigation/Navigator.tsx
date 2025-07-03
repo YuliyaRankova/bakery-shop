@@ -11,12 +11,12 @@ const Navigator: FC<Props> = ({items, sub}) => {
     return (
         <div>
             <nav>
-                <ul className={`nav-list ${sub}`}>
-                    {items.map(item =>
-                        <NavLink className={"nav-link"} to={item.path} key={item.path}>
-                            <li>{item.title}</li>
-                        </NavLink>
-                    )}
+                <ul className={`nav-list ${sub}`} >
+                    {
+                        items.map(item =>
+                            <NavLink to={item.path} key={item.path} style={{textDecorationLine:"none"}}><li>{item.title}</li></NavLink>
+                        )
+                    }
                 </ul>
             </nav>
             <Outlet/>
