@@ -32,4 +32,9 @@ export type ProductType = {
 
 export type Category = {
     category_name: string
-}
+};
+
+export type ShopCartProdType ={
+    cartProdId:string,
+    count: number
+};
