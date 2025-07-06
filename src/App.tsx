@@ -1,6 +1,6 @@
 import './App.css'
 import {Navigate, Route, Routes, useLocation, useNavigate} from "react-router-dom";
-import {type ProductType, Roles, RouteType} from "./utils/shop-types.ts";
+import {type ProductType, Roles, RouteType, ShopCartProdType} from "./utils/shop-types.ts";
 import Home from "./components/Home.tsx";
 import Customers from "./components/Customers.tsx";
 import Orders from "./components/Orders.tsx";
@@ -18,22 +18,37 @@ import {prodsUpd} from "./redux/slices/productSlice.ts";
 import {Paths} from "./utils/paths.ts";
 import Login from './components/servicePages/Login.tsx';
 import Logout from './components/servicePages/Logout.tsx';
+import {resetCart, setCart} from "./redux/slices/cartSlice.ts";
+import {getCartProducts} from "./firebase/firebaseCartService.ts";
 
 
 function App() {
     const location = useLocation();
     const navigate = useNavigate();
     const dispatch  = useAppDispatch();
-    const {authUser} = useAppSelector(state => state.auth)
+    const {authUser} = useAppSelector(state => state.auth);
+
     useEffect(() => {
         if(location.pathname === `/${Paths.ERROR}`)
             navigate('/')
     }, []);
+
     useEffect(() => {
         const subscrition = getProducts().subscribe({
             next: (prods: ProductType[]) => {dispatch(prodsUpd(prods))}
         })
         return () => {subscrition.unsubscribe()}
+    }, []);
+
+    useEffect(() => {
+        if(!authUser || authUser.email.includes('admin'))
+            dispatch(resetCart());
+        else{
+            const subscription = getCartProducts(`${authUser.email}_collection`);
+            subscription.subscribe({
+                next:(cartProducts: ShopCartProdType[]) => dispatch(setCart(cartProducts)),
+            })
+        }
     }, []);
 
     const predicate = (item:RouteType) => {

@@ -6,7 +6,8 @@ import {prodsReducer} from "./slices/productSlice.ts";
 export const store = configureStore({
     reducer: {
         "auth":authReducer,
-        "products":prodsReducer
+        "products":prodsReducer,
+        "cart": cartReducer
     }
 })
 export type RootState = ReturnType<typeof store.getState>
