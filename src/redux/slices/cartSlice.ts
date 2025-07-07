@@ -1,4 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
+import {ShopCartProdType} from "../../utils/shop-types.ts";
 
 const initialState: {cartProducts:ShopCartProdType[]} = {
    cartProducts:[]
