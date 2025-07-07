@@ -34,22 +34,22 @@ function App() {
     }, []);
 
     useEffect(() => {
-        const subscrition = getProducts().subscribe({
+        const subscription = getProducts().subscribe({
             next: (prods: ProductType[]) => {dispatch(prodsUpd(prods))}
         })
-        return () => {subscrition.unsubscribe()}
+        return () => {subscription.unsubscribe()}
     }, []);
 
     useEffect(() => {
-        if(!authUser || authUser.email.includes('admin'))
+        if(!authUser || authUser.email.includes('admin')){
             dispatch(resetCart());
-        else{
-            const subscription = getCartProducts(`${authUser.email}_collection`);
-            subscription.subscribe({
-                next:(cartProducts: ShopCartProdType[]) => dispatch(setCart(cartProducts)),
-            })
-        }
-    }, []);
+            return
+        };
+        const subscription = getCartProducts(`${authUser!.email}_collection`).subscribe({
+                next:(cartProducts: ShopCartProdType[]) => dispatch(setCart(cartProducts))
+            });
+        return () => {subscription.unsubscribe()};
+    }, [authUser]);
 
     const predicate = (item:RouteType) => {
         return (

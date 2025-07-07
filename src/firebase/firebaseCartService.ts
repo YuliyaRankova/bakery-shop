@@ -38,6 +38,6 @@ export const removeProductUnitFromCart = async (collName:string, id:string) => {
     else await addProductToCart(collName, {cartProdId:id, count:count-1});
 };
 
-export const getCartProducts = async (callName:string):Observable<ShopCartProdType[]> =>{
-    return collectionData(collection(db, callName)) as Observable<ShopCartProdType[]>;
+export const getCartProducts = (collName:string):Observable<ShopCartProdType[]> =>{
+    return collectionData(collection(db, collName)) as Observable<ShopCartProdType[]>;
 }

@@ -1,7 +1,9 @@
 import {useAppSelector} from "../../redux/hooks.ts";
-import {GridColDef} from "@mui/x-data-grid";
+import {GridActionsCellItem, GridColDef} from "@mui/x-data-grid";
 import {Avatar, Box} from "@mui/material";
 import {DataGrid} from "@mui/x-data-grid";
+import {RemoveIcon} from "../templates/CustomIcons.tsx";
+import {removeProduct} from "../../firebase/firebaseDBService.ts";
 
 const BreadProductsAdmin = () => {
     const {currProds} = useAppSelector(state => state.products);
@@ -17,7 +19,12 @@ const BreadProductsAdmin = () => {
             return(
                 <Avatar src={"/images/" + params.value}/>
             )
-            } }
+            } },
+        { field: 'actions', type: "actions", headerName: 'Delete item', flex: 0.3,
+            getActions: ({id}) => [
+                <GridActionsCellItem label={"remove"} icon={<RemoveIcon/>}
+                                     onClick={() => removeProduct(id as string)}/>
+            ]}
     ]
 
     return (
